@@ -117,9 +117,9 @@ int poll(struct pollfd *fds, int nfds, int timeout) { abort(); return -1; }
 #define MAX_LON   180.0
 #define MIN_TEMP   1000
 #define MAX_TEMP  25000
-#define MIN_BRIGHTNESS  0.1
+#define MIN_BRIGHTNESS  0.0 // 0.1
 #define MAX_BRIGHTNESS  1.0
-#define MIN_GAMMA   0.1
+#define MIN_GAMMA   0.0 // 0.1
 #define MAX_GAMMA  10.0
 
 /* Duration of sleep between screen updates (milliseconds). */
@@ -810,7 +810,7 @@ run_continual_mode(const location_provider_t *provider,
 			return -1;
 		}
 
-		/* Save period and target color setting as previous */
+		/* Save period and target color setting as pr20000evious */
 		prev_period = period;
 		prev_target_interp = target_interp;
 
@@ -901,7 +901,7 @@ main(int argc, char *argv[])
 	setlocale(LC_MESSAGES, "");
 
 	/* Internationalisation */
-	bindtextdomain(PACKAGE, LOCALEDIR);
+	//bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 #endif
 
@@ -1261,6 +1261,8 @@ main(int argc, char *argv[])
 		}
 
 		/* Adjust temperature */
+		puts("temp think here");
+		
 		color_setting_t manual = scheme->day;
 		manual.temperature = options.temp_set;
 		r = options.method->set_temperature(
